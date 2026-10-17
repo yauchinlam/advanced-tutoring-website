@@ -11,7 +11,7 @@ const SITE_CONFIG = {
   primaryCta: 'Book a Tutoring Session',
   email: 'support@advancedtutoringinstitute.com',
   phone: '',
-  calendlyUrl: 'https://calendly.com/advancedtutoringinstitute/private-tutoring', // Full HTTPS https://calendly.com/account/event URL.
+  calendlyUrl: 'https://calendly.com/elitelambdatutoring/private-tutoring', // Full HTTPS https://calendly.com/account/event URL.
   rateText: '$125 per 60-minute session',
   copyrightYear: '2026',
   socialLinks: {
