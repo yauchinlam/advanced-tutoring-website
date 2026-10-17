@@ -44,9 +44,6 @@
       }
     });
   });
-  document.querySelectorAll('[data-contact-fallback]').forEach((element) => {
-    element.hidden = contacts.some(([, , valid]) => valid);
-  });
 
   const httpsUrl = (entry) => {
     try {
@@ -72,7 +69,17 @@
   });
 
   const bookingUrl = httpsUrl(config.calendlyUrl);
-  if (!bookingUrl || bookingUrl.hostname !== 'calendly.com') return;
+  if (!bookingUrl || bookingUrl.hostname !== 'calendly.com') {
+    const status = document.querySelector('[data-booking-status]');
+    if (status) status.textContent = 'The booking link could not be loaded. Please email support for help arranging a session.';
+    document.querySelectorAll('[data-booking-link]').forEach((link) => {
+      link.href = 'book.html';
+      if (link.closest('main') && document.body.hasAttribute('data-booking-redirect')) {
+        link.hidden = true;
+      }
+    });
+    return;
+  }
   document.querySelectorAll('[data-booking-link]').forEach((link) => {
     link.href = bookingUrl.href;
     link.hidden = false;

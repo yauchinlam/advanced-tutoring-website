@@ -4,7 +4,7 @@
 // Never store API keys, payment secrets, passwords, or private tokens here.
 // Leave optional contact and social values blank to hide their links.
 const SITE_CONFIG = {
-  businessName: 'Yauchin Lam - Advanced Tutoring Institute',
+  businessName: 'Advanced Tutoring Institute',
   publicName: 'Yauchin M. Lam',
   professionalTitle: 'Advanced Math & Physics Tutor | Senior Software Engineer',
   locationText: 'In-Person Tutoring in Selected DMV Areas | Online Nationwide',
