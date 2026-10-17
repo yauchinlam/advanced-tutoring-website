@@ -166,3 +166,171 @@ footer { border-top:1px solid var(--line); padding-block:35px; }
 .support-address { font-size:clamp(1rem,2vw,1.25rem); font-weight:650; overflow-wrap:anywhere; }
 .support-details { padding-left:20px; color:var(--muted); }
 .support-details li { margin-bottom:12px; }
+
+
+/* Distinctive Elite Lambda brand treatment
+   Keep the approved five-color palette, but use a stronger academic/editorial hierarchy
+   so the site does not resemble nearby tutoring competitors. */
+.site-header {
+  background:var(--white);
+  border-top:4px solid var(--navy);
+  border-bottom:1px solid var(--line);
+}
+.brand-mark {
+  background:var(--navy);
+  color:var(--white);
+  border:1px solid var(--indigo);
+}
+.navbar .nav-link {
+  color:var(--text);
+}
+.navbar .nav-link:hover,
+.navbar .nav-link[aria-current="page"] {
+  color:var(--navy);
+}
+.hero {
+  position:relative;
+  background:linear-gradient(110deg,var(--bg) 0 62%,var(--white) 62%);
+  border-bottom:1px solid var(--line);
+}
+.hero::before {
+  content:"";
+  position:absolute;
+  inset:0 auto 0 0;
+  width:8px;
+  background:var(--navy);
+}
+.hero h1 {
+  color:var(--text);
+}
+.hero h1 span {
+  color:var(--navy);
+}
+.hero .eyebrow,
+.hero .service-location {
+  color:var(--navy);
+}
+.notebook {
+  transform:none;
+  border:1px solid var(--line);
+  border-left:6px solid var(--navy);
+  background-color:var(--white);
+  box-shadow:0 18px 40px #30252212;
+}
+.notebook::before {
+  content:"";
+  position:absolute;
+  top:0;
+  right:0;
+  width:34%;
+  height:6px;
+  background:var(--indigo);
+  border-radius:0 var(--radius) 0 0;
+}
+.equation,
+.graph::after {
+  color:var(--navy);
+}
+.graph::before {
+  border-bottom-color:var(--navy);
+}
+.trust-row {
+  background:var(--white);
+  border:1px solid var(--line);
+  border-left:4px solid var(--indigo);
+  padding:20px 22px;
+  border-radius:10px;
+}
+.trust-row span::before {
+  color:var(--navy);
+}
+.tags li {
+  background:var(--white);
+  border-color:var(--indigo);
+  color:var(--text);
+}
+.expertise {
+  background:var(--navy);
+  border-block:0;
+}
+.expertise .section-top h2,
+.expertise .section-top .intro {
+  color:var(--white);
+}
+.expertise .section-top .eyebrow {
+  color:var(--indigo);
+}
+.expertise .subject {
+  background:var(--white);
+  border:0;
+  border-top:4px solid var(--indigo);
+  box-shadow:0 12px 24px #30252214;
+}
+.expertise .subject h3 {
+  color:var(--navy);
+}
+.expertise .subject-note {
+  background:var(--white);
+  border-left:6px solid var(--indigo);
+  border-radius:var(--radius);
+}
+.expertise .subject-note h3 {
+  color:var(--navy);
+}
+.symbol {
+  background:var(--bg);
+  border-color:var(--indigo);
+  color:var(--navy);
+}
+.principle {
+  background:var(--white);
+  border-left-color:var(--indigo);
+  color:var(--text);
+}
+.steps li::before {
+  color:var(--navy);
+  border-top-color:var(--indigo);
+}
+.button,
+.btn-primary {
+  background:var(--navy);
+  border-color:var(--navy);
+  color:var(--white);
+}
+.button:hover,
+.btn-primary:hover {
+  background:var(--text);
+  border-color:var(--text);
+  color:var(--white);
+}
+.button.secondary {
+  background:var(--white);
+  border-color:var(--indigo);
+  color:var(--text);
+}
+.button.secondary:hover {
+  background:var(--bg);
+  color:var(--navy);
+}
+.closing {
+  background:var(--text);
+  border-top:6px solid var(--indigo);
+}
+.closing .button {
+  background:var(--navy);
+  color:var(--white);
+  border:1px solid var(--indigo);
+}
+.closing .button:hover {
+  background:var(--white);
+  color:var(--navy);
+}
+footer {
+  background:var(--white);
+  border-top:4px solid var(--navy);
+}
+@media (max-width:991.98px) {
+  .hero {
+    background:var(--bg);
+  }
+}
