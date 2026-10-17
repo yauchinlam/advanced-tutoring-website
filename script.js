@@ -81,7 +81,7 @@
     link.href = bookingUrl.href;
     link.hidden = false;
   });
-  // Keep the setup notice until business policies and payment settings are confirmed.
+  // Load the widget after validating the public booking URL.
   const widgetScript = document.createElement('script');
   widgetScript.src = 'https://assets.calendly.com/assets/external/widget.js';
   widgetScript.async = true;
