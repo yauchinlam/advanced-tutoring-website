@@ -18,6 +18,8 @@ const SITE_CONFIG = {
     linkedin: '',
     instagram: '',
     facebook: '',
+    twitter: '',
+    whatsapp: '',
     youtube: ''
   }
 };

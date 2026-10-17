@@ -27,7 +27,7 @@ p { margin-bottom:20px; }
 /* Header and responsive navigation */
 .site-header { background:#ffffffed; border-bottom:1px solid var(--line); }
 .brand { font-size:1rem; display:flex; align-items:center; gap:12px; color:var(--navy); text-decoration:none; font-weight:750; line-height:1.3; }
-.brand-mark { display:grid; place-items:center; width:38px; height:38px; background:var(--navy); color:white; border-radius:9px; font:24px Georgia,serif; }
+.brand-mark { display:grid; place-items:center; width:38px; height:38px; background:var(--navy); color:white; border-radius:9px; font:19px Georgia,serif; letter-spacing:-.08em; }
 .brand small { display:block; color:var(--muted); font-size:.68rem; font-weight:500; letter-spacing:.06em; margin-top:4px; }
 /* Hero: a CSS-only mathematical notebook */
 .hero { padding-block:clamp(56px,7vw,96px) 42px; overflow:hidden; }
