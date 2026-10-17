@@ -9,6 +9,7 @@ advanced-tutoring-website/
 ├── index.html       # Home: overview, subjects, teaching approach, and booking buttons
 ├── about.html       # Tutor background and credentials
 ├── rates-faq.html   # Session format, rates, FAQ, and booking policies
+├── support.html     # Support email, contact guidance, and help links
 ├── book.html        # Redirect for existing booking links
 ├── styles.css       # Custom visual identity and Bootstrap component theming
 ├── site-config.js   # Public business details (no secrets)
@@ -34,7 +35,7 @@ Visit `http://localhost:8000`. Stop the server with Ctrl+C. Bootstrap CSS and it
 
 ## Customization
 
-- **Public business details:** Edit only `site-config.js` for the business name, email, phone, Calendly URL, rate text, social URLs, and copyright year. The page title, repeated names, home-link labels, and marked contact/pricing elements update automatically across all four pages. Edit the general meta description in HTML if the service itself changes.
+- **Public business details:** Edit only `site-config.js` for the business name, email, phone, Calendly URL, rate text, social URLs, and copyright year. The page title, repeated names, home-link labels, and marked contact/pricing elements update automatically across all five pages. Edit the general meta description in HTML if the service itself changes.
 - **Academic profile:** Academic copy now reflects the approved public profile supplied by the tutor. Edit credentials and biographical content in `about.html` when facts change; do not add unsupported qualifications or outcomes.
 - **Subjects and approach:** Edit the subject cards, audience list, teaching process, and session descriptions to match actual services. Add subjects by duplicating a `.col` wrapper and its `.subject.card` article in the expertise grid.
 - **Rates and policies:** Set public rate text in `site-config.js`. `rates-faq.html` contains the confirmed 60-minute session format, recurring availability, and cancellation policies. Keep policy wording in HTML; confirm the online platform and integration details before accepting bookings. Edit or hide the optional `.rates` aside using the `hidden` attribute.
@@ -54,7 +55,7 @@ The static site does not collect payments itself. Payment availability depends o
 
 ## Deployment
 
-Upload `index.html`, `about.html`, `rates-faq.html`, `book.html`, `styles.css`, `site-config.js`, `script.js`, and `assets/` together to any static web host, preserving their relative paths. Set the repository root as the publish directory and leave the build command empty. No server-side runtime or environment variables are required. `README.md` does not need to be served.
+Upload `index.html`, `about.html`, `rates-faq.html`, `support.html`, `book.html`, `styles.css`, `site-config.js`, `script.js`, and `assets/` together to any static web host, preserving their relative paths. Set the repository root as the publish directory and leave the build command empty. No server-side runtime or environment variables are required. `README.md` does not need to be served.
 
 For GitHub Pages, publish from the repository's chosen branch and root directory. For hosts such as Netlify or Cloudflare Pages, choose a static deployment with no framework and no build command. Enable HTTPS through your host.
 
@@ -92,7 +93,7 @@ All values in this file are **public and visible to visitors**. Never add API ke
 
 `script.js` fills only explicitly marked elements using `textContent`, validated contact URLs, and HTTPS social/booking links. No HTML templates or general presentation logic belong in the config. Adding another social network requires an HTML link with its `data-social` key as well as a matching config entry.
 
-Subjects and teaching philosophy stay in `index.html`, credentials in `about.html`, session details and FAQ policies in `rates-faq.html`, and the compatibility booking redirect in `book.html`. Booking availability, actual charges, and payment settings remain in Calendly. Changing contact details or public rate text does not require editing HTML, CSS, or `script.js`.
+Subjects and teaching philosophy stay in `index.html`, credentials in `about.html`, session details and grouped FAQ policies in `rates-faq.html`, support guidance in `support.html`, and the compatibility booking redirect in `book.html`. Booking availability, actual charges, and payment settings remain in Calendly. Changing contact details or public rate text does not require editing HTML, CSS, or `script.js`.
 
 If JavaScript or the config fails to load, the HTML retains a generic tutor name, understandable rates/contact fallback text, and all main academic content. Optional contact and social links remain hidden. Dynamic business details and booking require JavaScript. Do not replace generic fallbacks with duplicate real business values: keep the config as their single source.
 
@@ -115,3 +116,7 @@ To revise the card, replace the square Open Graph PNG and/or the wide Twitter PN
 After deploying, request a fresh scrape through your sharing platform's preview debugger and check a newly shared link. Platforms control their own card layout and may cache earlier previews. If replacing an already cached image, use a new image filename and update the corresponding image URLs to prompt a refresh.
 
 The browser favicon uses the navy-and-white lowercase lambda (λ) brand mark in `assets/favicon.svg`, with a multi-size root `favicon.ico` fallback and a 180 × 180 `assets/apple-touch-icon.png` for Apple home-screen bookmarks. Deploy `favicon.ico` at the site root along with `assets/`. When changing the mark, update the SVG, ICO, and Apple touch icon together. These are static assets and require no Python on GitHub Pages.
+
+## Support content
+
+The Support page links to Calendly for new bookings and directs existing clients to their confirmation links for changes. Support email links use the `email` value in `site-config.js`. Keep the address there as the single source. The FAQ is grouped into getting started, session preparation, and booking and payment, with stable question IDs and topic links. Keep support guidance aligned with the FAQ policies. Do not add response-time promises without confirming them.
