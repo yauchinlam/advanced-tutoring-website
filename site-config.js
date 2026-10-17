@@ -9,7 +9,7 @@ const SITE_CONFIG = {
   professionalTitle: 'Advanced Math & Physics Tutor | Senior Software Engineer',
   locationText: 'In-Person Tutoring in Selected DMV Areas | Online Nationwide',
   primaryCta: 'Book a Tutoring Session',
-  email: 'support@advancedtutoringinstitute.com',
+  email: 'yauchinlam17@gmail.com',
   phone: '',
   calendlyUrl: 'https://calendly.com/elitelambdatutoring/private-tutoring', // Full HTTPS https://calendly.com/account/event URL.
   rateText: '$125 per 60-minute session',

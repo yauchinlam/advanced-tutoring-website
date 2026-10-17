@@ -21,6 +21,8 @@ advanced-tutoring-website/
 
 The academic profile uses the original tutor photo at `assets/yauchin-lam-headshot.jpg`. Replace that file to update the photo; update the image dimensions in HTML if its aspect ratio changes. Decorative graphics use CSS and text symbols. Store future local media in `assets/` and reference it with relative paths such as `assets/portrait.jpg`. Give meaningful images descriptive alt text; use empty alt text for decorative images.
 
+The public domain is `https://elitelambdatutoring.com`. Public contact links use `yauchinlam17@gmail.com`. Keep `CNAME`, canonical URLs, sharing URLs, `robots.txt`, and `sitemap.xml` aligned with the domain.
+
 ## Local usage
 
 Open `index.html` directly in a browser. All local paths are relative, and no build step is needed.
