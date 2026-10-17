@@ -22,7 +22,7 @@
   if (name) {
     document.title = `${document.body.dataset.pageTitle || 'Advanced Mathematics & Physics'} | ${name}`;
     document.querySelectorAll('[data-business-home]').forEach((link) => {
-      link.setAttribute('aria-label', `${name} — home`);
+      link.setAttribute('aria-label', `${name} home`);
     });
   }
 
