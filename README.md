@@ -1,4 +1,4 @@
-# Advanced Tutoring Website
+# Elite Lambda Tutoring Website
 
 A responsive static website for an independent mathematics and physics tutor. Built with semantic HTML, Bootstrap 5.3.8 via CDN, custom CSS, and a small vanilla JavaScript file. No package installation, JavaScript application framework, or build step is required.
 
