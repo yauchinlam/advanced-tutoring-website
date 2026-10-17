@@ -6,10 +6,13 @@ A responsive static website for an independent mathematics and physics tutor. Bu
 
 ```text
 advanced-tutoring-website/
-├── index.html       # Semantic page structure and editable content
+├── index.html       # Home: overview, subjects, teaching approach, and booking buttons
+├── about.html       # Tutor background and credentials
+├── rates-faq.html   # Session format, rates, FAQ, and booking policies
+├── book.html        # Redirect for existing booking links
 ├── styles.css       # Custom visual identity and Bootstrap component theming
 ├── site-config.js   # Public business details (no secrets)
-├── script.js        # Business-detail population and Calendly loading
+├── script.js        # Business details, booking links, and booking redirect
 ├── assets/          # Local images, icons, SVGs, and other media
 │   └── .gitkeep     # Keeps the empty asset directory in version control
 └── README.md
@@ -27,14 +30,14 @@ Optionally serve the project locally with Python:
 python3 -m http.server 8000
 ```
 
-Visit `http://localhost:8000`. Stop the server with Ctrl+C. Bootstrap CSS and its JavaScript bundle load from jsDelivr and require an internet connection, as does the configured third-party calendar. The pinned CDN tags include subresource integrity hashes.
+Visit `http://localhost:8000`. Stop the server with Ctrl+C. Bootstrap CSS and its JavaScript bundle load from jsDelivr and require an internet connection, as does the external Calendly booking page. The pinned CDN tags include subresource integrity hashes.
 
 ## Customization
 
-- **Public business details:** Edit only `site-config.js` for the business name, email, phone, Calendly URL, rate text, social URLs, and copyright year. The page title, repeated names, home-link labels, and marked contact/pricing elements update automatically. Edit the general meta description in HTML if the service itself changes.
-- **Academic profile:** Academic copy now reflects the approved public profile supplied by the tutor. Edit credentials and biographical content in `index.html` when facts change; do not add unsupported qualifications or outcomes.
+- **Public business details:** Edit only `site-config.js` for the business name, email, phone, Calendly URL, rate text, social URLs, and copyright year. The page title, repeated names, home-link labels, and marked contact/pricing elements update automatically across all four pages. Edit the general meta description in HTML if the service itself changes.
+- **Academic profile:** Academic copy now reflects the approved public profile supplied by the tutor. Edit credentials and biographical content in `about.html` when facts change; do not add unsupported qualifications or outcomes.
 - **Subjects and approach:** Edit the subject cards, audience list, teaching process, and session descriptions to match actual services. Add subjects by duplicating a `.col` wrapper and its `.subject.card` article in the expertise grid.
-- **Rates and policies:** Set public rate text in `site-config.js`. The HTML contains the confirmed 60-minute session format, recurring availability, and cancellation policies. Keep policy wording in HTML; confirm the online platform and integration details before accepting bookings. Edit or hide the optional `.rates` aside using the `hidden` attribute.
+- **Rates and policies:** Set public rate text in `site-config.js`. `rates-faq.html` contains the confirmed 60-minute session format, recurring availability, and cancellation policies. Keep policy wording in HTML; confirm the online platform and integration details before accepting bookings. Edit or hide the optional `.rates` aside using the `hidden` attribute.
 - **Design:** Edit the CSS custom properties at the top of `styles.css`. Bootstrap containers, rows, responsive columns, spacing, and flex utilities provide the layout. Custom tablet and mobile rules refine the presentation. Keep Bootstrap CSS before `styles.css`. Load deferred scripts in order: Bootstrap bundle, `site-config.js`, then `script.js`. The system font stack needs no external font downloads.
 - **Legal information:** Add real Privacy and Terms pages and footer links if needed. No placeholder legal links are included.
 
@@ -42,20 +45,20 @@ Visit `http://localhost:8000`. Stop the server with Ctrl+C. Bootstrap CSS and it
 
 1. Set `calendlyUrl` in `site-config.js` to your HTTPS Calendly scheduling URL, for example `https://calendly.com/your-account/your-event`. No HTML edit is needed to change the URL.
 2. Configure availability, session lengths, rates, booking policies, and any payment requirements in Calendly itself.
-3. Remove the visible `.setup-notice` in HTML after completing setup and replace provisional booking and FAQ copy with confirmed details.
+3. Review the in-person service-area reminder in `book.html` and the rates and booking policies in `rates-faq.html`. Keep these aligned with the Calendly event.
 4. Test a booking on the deployed site, including confirmation, rescheduling, cancellation, timezone display, and payment if enabled.
 
-`script.js` loads Calendly's external widget only when the URL uses HTTPS and the `calendly.com` hostname. A blank or invalid URL intentionally does not load the widget. A valid URL also enables a direct booking link. The booking area remains hidden while the URL is blank. Remove or revise the coming-soon notice and provisional integration wording only after confirming the booking/payment setup. The calendar's dimensions live in `styles.css`; no inline styles or scripts are authored in the page. Calendly may inject its own third-party markup and styling at runtime.
+`script.js` points all marked booking buttons directly to the configured HTTPS URL on `calendly.com`, in the same tab. Calendly handles the complete booking interface; no widget, iframe, or Calendly script is loaded on this site. `book.html` remains as a compatibility redirect for bookmarks and older shared links, using `location.replace` so the Back button returns to the referring page. It also offers a manual continuation button. A blank or invalid URL leaves the redirect inactive and displays contact guidance. Keep `calendlyUrl` in `site-config.js` as the single source for booking destinations.
 
-The static site does not collect payments itself. Payment availability depends on the booking platform configuration. Do not claim a payment provider is connected until you have configured and tested it. Visitors need JavaScript enabled for the calendar; the Bootstrap mobile navigation toggle and FAQ accordion also require JavaScript and the Bootstrap CDN bundle.
+The static site does not collect payments itself. Payment availability depends on the booking platform configuration. Do not claim a payment provider is connected until you have configured and tested it. Visitors need JavaScript enabled to populate the configured booking links and follow the compatibility redirect; the Bootstrap mobile navigation toggle and FAQ accordion also require JavaScript and the Bootstrap CDN bundle.
 
 ## Deployment
 
-Upload `index.html`, `styles.css`, `site-config.js`, `script.js`, and `assets/` together to any static web host, preserving their relative paths. Set the repository root as the publish directory and leave the build command empty. No server-side runtime or environment variables are required. `README.md` does not need to be served.
+Upload `index.html`, `about.html`, `rates-faq.html`, `book.html`, `styles.css`, `site-config.js`, `script.js`, and `assets/` together to any static web host, preserving their relative paths. Set the repository root as the publish directory and leave the build command empty. No server-side runtime or environment variables are required. `README.md` does not need to be served.
 
 For GitHub Pages, publish from the repository's chosen branch and root directory. For hosts such as Netlify or Cloudflare Pages, choose a static deployment with no framework and no build command. Enable HTTPS through your host.
 
-Before launch, review `site-config.js` and review HTML for service-area availability, agreed meeting locations, online platform, and booking/payment details. Generic HTML business-name fallbacks remain; JavaScript replaces them with the configured name. Check the finished site at mobile, tablet, and desktop widths, use keyboard navigation, and verify all booking behavior. All anchor navigation remains within the page, so no URL rewrite rules are required.
+Before launch, review `site-config.js` and review HTML for service-area availability, agreed meeting locations, online platform, and booking/payment details. Generic HTML business-name fallbacks remain; JavaScript replaces them with the configured name. Check the finished site at mobile, tablet, and desktop widths, use keyboard navigation, and verify all booking behavior. Navigation uses real `.html` pages, so no URL rewrite rules are required. The homepage retains prominent booking buttons that open Calendly directly after configuration loads (`book.html` is their HTML fallback). Each page has its own title, description, canonical URL, sharing URL, and current-page navigation indicator. Header and footer markup is shared by convention: keep it aligned when editing the four HTML files.
 
 ## Accessibility and behavior
 
@@ -80,7 +83,7 @@ CDN versions and integrity values follow the [official Bootstrap quick start](ht
 | `primaryCta` | Primary booking button text |
 | `email` | Visible email address and `mailto:` link; blank hides it |
 | `phone` | Visible phone number and `tel:` link; blank hides it; use an optional leading `+`, digits, spaces, parentheses, dots, or hyphens |
-| `calendlyUrl` | Widget `data-url` and direct booking link; use an HTTPS URL on `calendly.com` |
+| `calendlyUrl` | Direct booking buttons and compatibility redirect; use an HTTPS URL on `calendly.com` |
 | `rateText` | Public rates area; does not change actual prices in Calendly |
 | `copyrightYear` | Copyright year displayed in the footer |
 | `socialLinks` | Optional HTTPS URLs for LinkedIn, Instagram, Facebook, and YouTube; blank values hide links |
@@ -89,7 +92,7 @@ All values in this file are **public and visible to visitors**. Never add API ke
 
 `script.js` fills only explicitly marked elements using `textContent`, validated contact URLs, and HTTPS social/booking links. No HTML templates or general presentation logic belong in the config. Adding another social network requires an HTML link with its `data-social` key as well as a matching config entry.
 
-Long academic content, credentials, course descriptions, teaching philosophy, and FAQ policies stay in `index.html`. Booking availability, actual charges, and payment settings remain in Calendly. Changing contact details or public rate text does not require editing HTML, CSS, or `script.js`.
+Subjects and teaching philosophy stay in `index.html`, credentials in `about.html`, session details and FAQ policies in `rates-faq.html`, and the compatibility booking redirect in `book.html`. Booking availability, actual charges, and payment settings remain in Calendly. Changing contact details or public rate text does not require editing HTML, CSS, or `script.js`.
 
 If JavaScript or the config fails to load, the HTML retains a generic tutor name, understandable rates/contact fallback text, and all main academic content. Optional contact and social links remain hidden. Dynamic business details and booking require JavaScript. Do not replace generic fallbacks with duplicate real business values: keep the config as their single source.
 
@@ -103,9 +106,9 @@ At launch, in-person tutoring takes place at the student’s home within selecte
 
 ## Shared-link preview
 
-`index.html` contains static Open Graph and Twitter large-image metadata for text messages and social sharing. Open Graph uses `assets/social-preview-square.png` (1200 × 1200), with padded, centered content for square thumbnails. Twitter/X uses `assets/social-preview.png` (1200 × 630), with absolute HTTPS URLs matching `CNAME`. Upload the image with the rest of the site.
+Each HTML page contains static Open Graph and Twitter large-image metadata for text messages and social sharing. Open Graph uses `assets/social-preview-square.png` (1200 × 1200), with padded, centered content for square thumbnails. Twitter/X uses `assets/social-preview.png` (1200 × 630), with absolute HTTPS URLs matching `CNAME`. Upload the image with the rest of the site.
 
-Sharing crawlers generally do not execute JavaScript, so preview titles, descriptions, URLs, and image alt text must be edited directly in the HTML; changes to `site-config.js` do not update them. This metadata is an intentional exception to the single-source business configuration. Keep both Open Graph and Twitter fields aligned. If the domain changes, update the canonical URL and all preview URLs too.
+Sharing crawlers generally do not execute JavaScript, so preview titles, descriptions, URLs, and image alt text must be edited directly in each page’s HTML; changes to `site-config.js` do not update them. This metadata is an intentional exception to the single-source business configuration. Keep both Open Graph and Twitter fields aligned. If the domain changes, update the canonical URL and all preview URLs too.
 
 To revise the card, replace the square Open Graph PNG and/or the wide Twitter PNG, preserving their respective dimensions. The website needs no build step or Python dependencies. All preview and icon files are ready-to-serve static assets.
 

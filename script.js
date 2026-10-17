@@ -20,7 +20,7 @@
   populate('rateText', value(config.rateText));
   populate('copyrightYear', String(config.copyrightYear || ''));
   if (name) {
-    document.title = `Advanced Mathematics & Physics | ${name}`;
+    document.title = `${document.body.dataset.pageTitle || 'Advanced Mathematics & Physics'} | ${name}`;
     document.querySelectorAll('[data-business-home]').forEach((link) => {
       link.setAttribute('aria-label', `${name} — home`);
     });
@@ -71,19 +71,15 @@
     element.hidden = socialCount === 0;
   });
 
-  const calendar = document.querySelector('.calendly-inline-widget');
-  if (!calendar) return;
   const bookingUrl = httpsUrl(config.calendlyUrl);
   if (!bookingUrl || bookingUrl.hostname !== 'calendly.com') return;
-  calendar.dataset.url = bookingUrl.href;
-  calendar.hidden = false;
   document.querySelectorAll('[data-booking-link]').forEach((link) => {
     link.href = bookingUrl.href;
     link.hidden = false;
   });
-  // Load the widget after validating the public booking URL.
-  const widgetScript = document.createElement('script');
-  widgetScript.src = 'https://assets.calendly.com/assets/external/widget.js';
-  widgetScript.async = true;
-  document.head.append(widgetScript);
+  if (document.body.hasAttribute('data-booking-redirect')) {
+    const status = document.querySelector('[data-booking-status]');
+    if (status) status.textContent = 'Opening Calendly. If you are not redirected, use the button below.';
+    window.location.replace(bookingUrl.href);
+  }
 })();
