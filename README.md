@@ -103,12 +103,12 @@ At launch, in-person tutoring takes place at the student’s home within selecte
 
 ## Shared-link preview
 
-`index.html` contains static Open Graph and Twitter large-image metadata for text messages and social sharing. The preview uses `assets/social-preview.png` (1200 × 630), with absolute HTTPS URLs matching `CNAME`. Upload the image with the rest of the site.
+`index.html` contains static Open Graph and Twitter large-image metadata for text messages and social sharing. Open Graph uses `assets/social-preview-square.png` (1200 × 1200), with padded, centered content for square thumbnails. Twitter/X uses `assets/social-preview.png` (1200 × 630), with absolute HTTPS URLs matching `CNAME`. Upload the image with the rest of the site.
 
 Sharing crawlers generally do not execute JavaScript, so preview titles, descriptions, URLs, and image alt text must be edited directly in the HTML; changes to `site-config.js` do not update them. This metadata is an intentional exception to the single-source business configuration. Keep both Open Graph and Twitter fields aligned. If the domain changes, update the canonical URL and all preview URLs too.
 
-To revise the card, replace `assets/social-preview.png` with an updated 1200 × 630 PNG. The website needs no build step or Python dependencies. All preview and icon files are ready-to-serve static assets.
+To revise the card, replace the square Open Graph PNG and/or the wide Twitter PNG, preserving their respective dimensions. The website needs no build step or Python dependencies. All preview and icon files are ready-to-serve static assets.
 
-After deploying, request a fresh scrape through your sharing platform's preview debugger and check a newly shared link. Platforms control their own card layout and may cache earlier previews. If replacing an already cached image, use a new image filename and update both image URLs to prompt a refresh.
+After deploying, request a fresh scrape through your sharing platform's preview debugger and check a newly shared link. Platforms control their own card layout and may cache earlier previews. If replacing an already cached image, use a new image filename and update the corresponding image URLs to prompt a refresh.
 
 The browser favicon uses the navy-and-white lowercase lambda (λ) brand mark in `assets/favicon.svg`, with a multi-size root `favicon.ico` fallback and a 180 × 180 `assets/apple-touch-icon.png` for Apple home-screen bookmarks. Deploy `favicon.ico` at the site root along with `assets/`. When changing the mark, update the SVG, ICO, and Apple touch icon together. These are static assets and require no Python on GitHub Pages.
