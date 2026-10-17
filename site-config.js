@@ -7,7 +7,7 @@ const SITE_CONFIG = {
   businessName: 'Yauchin Lam - Advanced Tutoring Institute',
   publicName: 'Yauchin M. Lam',
   professionalTitle: 'Advanced Math & Physics Tutor | Senior Software Engineer',
-  locationText: 'In-Home Tutoring in Selected DMV Areas | Online Nationwide',
+  locationText: 'In-Person Tutoring in Selected DMV Areas | Online Nationwide',
   primaryCta: 'Book a Tutoring Session',
   email: 'yauchinlam17@gmail.com',
   phone: '',
