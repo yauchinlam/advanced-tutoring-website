@@ -127,7 +127,7 @@ Each HTML page contains static Open Graph and Twitter large-image metadata for t
 
 Sharing crawlers generally do not execute JavaScript, so preview titles, descriptions, URLs, and image alt text must be edited directly in each page’s HTML; changes to `site-config.js` do not update them. This metadata is an intentional exception to the single-source business configuration. Keep both Open Graph and Twitter fields aligned. If the domain changes, update the canonical URL and all preview URLs too.
 
-To revise the card, replace the square Open Graph PNG and/or the wide Twitter PNG, preserving their respective dimensions. The website needs no build step or Python dependencies. All preview and icon files are ready-to-serve static assets.
+The only shared preview image is `assets/social-preview-20261018.jpg`, a 1536 by 807 JPEG used by all five pages for both Open Graph and Twitter cards. To revise the card, save the replacement image under a new filename and update the Open Graph and Twitter image URLs in all five HTML pages. Keep the Open Graph image type, width, height, and both image alt text fields aligned with the replacement. The website needs no build step or Python dependencies. All preview and icon files are ready-to-serve static assets.
 
 After deploying, request a fresh scrape through your sharing platform's preview debugger and check a newly shared link. Platforms control their own card layout and may cache earlier previews. If replacing an already cached image, use a new image filename and update the corresponding image URLs to prompt a refresh.
 
