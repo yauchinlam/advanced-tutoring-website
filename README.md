@@ -35,6 +35,20 @@ python3 -m http.server 8000
 
 Visit `http://localhost:8000`. Stop the server with Ctrl+C. Bootstrap CSS and its JavaScript bundle load from jsDelivr and require an internet connection, as does the external Calendly booking page. The pinned CDN tags include subresource integrity hashes.
 
+## Brand color theme
+
+Elite Lambda Tutoring uses the following approved five-color visual theme:
+
+| Role | Color | Hex |
+| --- | --- | --- |
+| Primary | Burgundy | `#751F30` |
+| Accent | Antique Gold | `#C39A52` |
+| Background | Silver Gray | `#ECEEEF` |
+| Dark text | Espresso | `#302522` |
+| Contrast | Pure White | `#FFFFFF` |
+
+Use Silver Gray as the main page background, Burgundy for primary brand structure and calls to action, Antique Gold for restrained accents and borders, Espresso for primary body text, and Pure White for high-contrast surfaces and text on dark backgrounds. Do not reintroduce the previous Ivory `#FAF7F0` background unless the brand palette is intentionally changed.
+
 ## Customization
 
 - **Public business details:** Edit only `site-config.js` for the business name, email, phone, Calendly URL, rate text, social URLs, and copyright year. The page title, repeated names, home-link labels, and marked contact/pricing elements update automatically across all five pages. Edit the general meta description in HTML if the service itself changes.

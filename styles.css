@@ -1,5 +1,5 @@
 /* Foundations */
-:root { --navy:#751F30; --bg:#FAF7F0; --indigo:#C39A52; --text:#302522; --muted:#302522B8; --line:#C39A5266; --white:#FFFFFF; --soft:#FAF7F0; --radius:16px; }
+:root { --navy:#751F30; --bg:#ECEEEF; --indigo:#C39A52; --text:#302522; --muted:#302522B8; --line:#C39A5266; --white:#FFFFFF; --soft:#ECEEEF; --radius:16px; }
 *,*::before,*::after { box-sizing:border-box; }
 [hidden] { display:none !important; }
 html { scroll-behavior:smooth; scroll-padding-top:100px; }
@@ -25,7 +25,7 @@ p { margin-bottom:20px; }
 .skip-link { position:fixed; top:12px; left:12px; transform:translateY(-160%); z-index:100; padding:12px 20px; background:var(--navy); color:white; }
 .skip-link:focus { transform:translateY(0); }
 /* Header and responsive navigation */
-.site-header { background:#FAF7F0F2; border-bottom:1px solid var(--line); }
+.site-header { background:#ECEEEFF2; border-bottom:1px solid var(--line); }
 .brand { font-size:1rem; display:flex; align-items:center; gap:12px; color:var(--navy); text-decoration:none; font-weight:750; line-height:1.3; }
 .brand-mark { display:grid; place-items:center; width:38px; height:38px; background:var(--navy); color:white; border-radius:9px; font:19px Georgia,serif; letter-spacing:-.08em; }
 .brand small { display:block; color:var(--muted); font-size:.68rem; font-weight:500; letter-spacing:.06em; margin-top:4px; }
@@ -68,15 +68,15 @@ p { margin-bottom:20px; }
 .steps h3 { font-size:1.06rem; margin:3px 0 8px; }
 .steps p { color:var(--muted); font-size:.9rem; margin:0; }
 /* Academic profile: all biographical details await verified copy. */
-.credentials { background:var(--navy); color:#FAF7F0; }
+.credentials { background:var(--navy); color:#FFFFFF; }
 .credentials h2,.credentials h3 { color:white; }
 .credentials .eyebrow { color:#C39A52; }
 .credentials .col-lg-5 > p { max-width:400px; }
-.edit-label { display:inline-block; border:1px solid #C39A52; padding:4px 10px; border-radius:4px; font:10px ui-monospace,monospace; letter-spacing:.08em; color:#FAF7F0; margin-bottom:24px; }
+.edit-label { display:inline-block; border:1px solid #C39A52; padding:4px 10px; border-radius:4px; font:10px ui-monospace,monospace; letter-spacing:.08em; color:#FFFFFF; margin-bottom:24px; }
 .profile-details { display:grid; grid-template-columns:1fr 1fr; gap:24px 32px; margin:0; }
 .profile-details div { border-top:1px solid #C39A5280; padding-top:16px; }
 .profile-details dt { font-size:.85rem; font-weight:650; color:white; margin-bottom:7px; }
-.profile-details dd { margin:0; font-size:.82rem; color:#FAF7F0; }
+.profile-details dd { margin:0; font-size:.82rem; color:#FFFFFF; }
 /* Session experience and editable rates */
 .session-item { border-top:1px solid var(--line); padding-top:20px; }
 .session-item .session-icon { color:var(--indigo); font:20px ui-monospace,monospace; margin-bottom:18px; display:block; }
@@ -91,9 +91,9 @@ p { margin-bottom:20px; }
 /* Closing call to action and footer */
 .closing { padding:58px; background:var(--navy); border-radius:var(--radius); display:flex; align-items:center; justify-content:space-between; gap:40px; margin-bottom:76px; }
 .closing h2 { color:white; font-size:clamp(1.7rem,3vw,2.5rem); max-width:610px; margin-bottom:14px; }
-.closing p { color:#FAF7F0; margin:0; font-size:.95rem; }
+.closing p { color:#FFFFFF; margin:0; font-size:.95rem; }
 .closing .button { flex-shrink:0; background:white; color:var(--navy); }
-.closing .button:hover { background:#FAF7F0; }
+.closing .button:hover { background:#ECEEEF; }
 footer { border-top:1px solid var(--line); padding-block:35px; }
 .footer-top,.footer-bottom { display:flex; justify-content:space-between; gap:24px; flex-wrap:wrap; }
 .footer-top { align-items:center; margin-bottom:28px; }
@@ -141,7 +141,7 @@ footer { border-top:1px solid var(--line); padding-block:35px; }
 .navbar-brand { max-width:calc(100% - 76px); }
 .navbar-brand [data-business="businessName"] { display:block; max-width:28ch; }
 .service-location { font-weight:650; }
-.profile-title { color:#FAF7F0; font-weight:650; }
+.profile-title { color:#FFFFFF; font-weight:650; }
 .rates > div { max-width:760px; }
 .rates [data-business="rateText"] { color:var(--navy); font-size:1.15rem; font-weight:700; margin-bottom:8px; }
 @media (min-width:1200px) { .navbar-brand { max-width:410px; } }
