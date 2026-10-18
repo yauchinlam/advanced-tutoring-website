@@ -123,7 +123,7 @@ At launch, in-person tutoring takes place at the student’s home within selecte
 
 ## Shared-link preview
 
-Each HTML page contains static Open Graph and Twitter large-image metadata for text messages and social sharing. Open Graph uses `assets/social-preview-brand.jpg` for Facebook, LinkedIn, WhatsApp, iMessage, and other Open Graph consumers. Twitter/X uses the same branded image through its dedicated card metadata, with absolute HTTPS URLs matching `CNAME`. Upload the image with the rest of the site.
+Each HTML page contains static Open Graph and Twitter large-image metadata for text messages and social sharing. Open Graph uses `assets/social-preview.png` for Facebook, LinkedIn, WhatsApp, iMessage, and other Open Graph consumers. Twitter/X uses the same branded image through its dedicated card metadata, with absolute HTTPS URLs matching `CNAME`. Upload the image with the rest of the site.
 
 Sharing crawlers generally do not execute JavaScript, so preview titles, descriptions, URLs, and image alt text must be edited directly in each page’s HTML; changes to `site-config.js` do not update them. This metadata is an intentional exception to the single-source business configuration. Keep both Open Graph and Twitter fields aligned. If the domain changes, update the canonical URL and all preview URLs too.
 
@@ -131,7 +131,7 @@ To revise the card, replace the square Open Graph PNG and/or the wide Twitter PN
 
 After deploying, request a fresh scrape through your sharing platform's preview debugger and check a newly shared link. Platforms control their own card layout and may cache earlier previews. If replacing an already cached image, use a new image filename and update the corresponding image URLs to prompt a refresh.
 
-The browser favicon uses the navy-and-white ελτ brand mark in the multi-size root `favicon.ico`, with `assets/apple-touch-icon.png` retained for Apple home-screen bookmarks. Deploy `favicon.ico` at the site root along with `assets/`. When changing the mark, update the SVG, ICO, and Apple touch icon together. These are static assets and require no Python on GitHub Pages.
+The browser favicon uses the Elite Lambda Tutoring ελτ brand mark in the multi-size root `favicon.ico`, with `assets/apple-touch-icon.png` retained for Apple home-screen bookmarks. Deploy `favicon.ico` at the site root along with `assets/`. When changing the mark, update the SVG, ICO, and Apple touch icon together. These are static assets and require no Python on GitHub Pages.
 
 ## Support content
 
