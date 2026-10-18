@@ -35,6 +35,20 @@ python3 -m http.server 8000
 
 Visit `http://localhost:8000`. Stop the server with Ctrl+C. Bootstrap CSS and its JavaScript bundle load from jsDelivr and require an internet connection, as does the external Calendly booking page. The pinned CDN tags include subresource integrity hashes.
 
+## Brand color theme
+
+Elite Lambda Tutoring uses the following approved five-color visual theme:
+
+| Role | Color | Hex |
+| --- | --- | --- |
+| Primary | Burgundy | `#751F30` |
+| Accent | Antique Gold | `#C39A52` |
+| Background | Silver Gray | `#ECEEEF` |
+| Dark text | Espresso | `#302522` |
+| Contrast | Pure White | `#FFFFFF` |
+
+Use Silver Gray as the main page background, Burgundy for primary brand structure and calls to action, Antique Gold for restrained accents and borders, Espresso for primary body text, and Pure White for high-contrast surfaces and text on dark backgrounds. Do not reintroduce the previous Ivory `#FAF7F0` background unless the brand palette is intentionally changed.
+
 ## Customization
 
 - **Public business details:** Edit only `site-config.js` for the business name, email, phone, Calendly URL, rate text, social URLs, and copyright year. The page title, repeated names, home-link labels, and marked contact/pricing elements update automatically across all five pages. Edit the general meta description in HTML if the service itself changes.
@@ -89,7 +103,7 @@ CDN versions and integrity values follow the [official Bootstrap quick start](ht
 | `calendlyUrl` | Direct booking buttons and compatibility redirect; use an HTTPS URL on `calendly.com` |
 | `rateText` | Public rates area; does not change actual prices in Calendly |
 | `copyrightYear` | Copyright year displayed in the footer |
-| `socialLinks` | Optional HTTPS URLs for LinkedIn, Instagram, Facebook, and YouTube; blank values hide links |
+| `socialLinks` | Optional HTTPS URLs for LinkedIn, Instagram, Facebook, X/Twitter, WhatsApp, and YouTube; blank values hide links |
 
 All values in this file are **public and visible to visitors**. Never add API keys, Stripe secret keys, database passwords, private tokens, or other secrets. If future functionality needs secrets, it must use a server-side service with environment variables; this static project has no secret storage.
 
@@ -109,7 +123,7 @@ At launch, in-person tutoring takes place at the student’s home within selecte
 
 ## Shared-link preview
 
-Each HTML page contains static Open Graph and Twitter large-image metadata for text messages and social sharing. Open Graph uses `assets/social-preview-square.png` (1200 × 1200), with padded, centered content for square thumbnails. Twitter/X uses `assets/social-preview.png` (1200 × 630), with absolute HTTPS URLs matching `CNAME`. Upload the image with the rest of the site.
+Each HTML page contains static Open Graph and Twitter large-image metadata for text messages and social sharing. Open Graph uses `assets/social-preview-brand.jpg` for Facebook, LinkedIn, WhatsApp, iMessage, and other Open Graph consumers. Twitter/X uses the same branded image through its dedicated card metadata, with absolute HTTPS URLs matching `CNAME`. Upload the image with the rest of the site.
 
 Sharing crawlers generally do not execute JavaScript, so preview titles, descriptions, URLs, and image alt text must be edited directly in each page’s HTML; changes to `site-config.js` do not update them. This metadata is an intentional exception to the single-source business configuration. Keep both Open Graph and Twitter fields aligned. If the domain changes, update the canonical URL and all preview URLs too.
 
@@ -117,7 +131,7 @@ To revise the card, replace the square Open Graph PNG and/or the wide Twitter PN
 
 After deploying, request a fresh scrape through your sharing platform's preview debugger and check a newly shared link. Platforms control their own card layout and may cache earlier previews. If replacing an already cached image, use a new image filename and update the corresponding image URLs to prompt a refresh.
 
-The browser favicon uses the navy-and-white lowercase lambda (λ) brand mark in `assets/favicon.svg`, with a multi-size root `favicon.ico` fallback and a 180 × 180 `assets/apple-touch-icon.png` for Apple home-screen bookmarks. Deploy `favicon.ico` at the site root along with `assets/`. When changing the mark, update the SVG, ICO, and Apple touch icon together. These are static assets and require no Python on GitHub Pages.
+The browser favicon uses the navy-and-white ελτ brand mark in the multi-size root `favicon.ico`, with `assets/apple-touch-icon.png` retained for Apple home-screen bookmarks. Deploy `favicon.ico` at the site root along with `assets/`. When changing the mark, update the SVG, ICO, and Apple touch icon together. These are static assets and require no Python on GitHub Pages.
 
 ## Support content
 
