@@ -1,9 +1,19 @@
-'use strict';
+// Public, build-time configuration. Never put secrets in this module.
+export interface SiteConfig {
+  businessName: string;
+  publicName: string;
+  professionalTitle: string;
+  locationText: string;
+  primaryCta: string;
+  email: string;
+  phone: string;
+  calendlyUrl: string;
+  rateText: string;
+  copyrightYear: string;
+  socialLinks: Record<string, string>;
+}
 
-// PUBLIC, CLIENT-VISIBLE DATA: visitors can read everything in this file.
-// Never store API keys, payment secrets, passwords, or private tokens here.
-// Leave optional contact and social values blank to hide their links.
-const SITE_CONFIG = {
+export const siteConfig = {
   businessName: 'Elite Lambda Tutoring',
   publicName: 'Yauchin M. Lam',
   professionalTitle: 'Advanced Math & Physics Tutor | Senior Software Engineer',
@@ -20,6 +30,6 @@ const SITE_CONFIG = {
     facebook: '',
     twitter: '',
     whatsapp: '',
-    youtube: ''
-  }
-};
+    youtube: '',
+  },
+} satisfies SiteConfig;
