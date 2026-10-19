@@ -131,7 +131,7 @@ All five pages use the 1254 by 1254 PNG for Open Graph and the 1536 by 807 JPEG 
 
 After deploying, request a fresh scrape through your sharing platform's preview debugger and check a newly shared link. Platforms control their own card layout and may cache earlier previews. If replacing an already cached image, use a new image filename and update the corresponding image URLs to prompt a refresh.
 
-The browser favicon uses the Elite Lambda Tutoring ελτ brand mark in the multi-size root `favicon.ico`, with `assets/apple-touch-icon.png` retained for Apple home-screen bookmarks. Deploy `favicon.ico` at the site root along with `assets/`. When changing the mark, update the root ICO, the ICO and PNG source files in `assets/`, and the Apple touch icon together. These are static assets and require no Python on GitHub Pages.
+Headers, footers, and browser icons use the circular burgundy Elite Lambda Tutoring ελτ brand mark. The header and footer share `assets/favicon.png`, with transparent corners to preserve the circle. The browser favicon uses the same artwork in the multi-size root `favicon.ico`, with `assets/apple-touch-icon.png` retained for Apple home-screen bookmarks. Deploy `favicon.ico` at the site root along with `assets/`. When changing the mark, update the root ICO, the ICO and PNG source files in `assets/`, and the Apple touch icon together. These are static assets and require no Python on GitHub Pages.
 
 ## Support content
 
