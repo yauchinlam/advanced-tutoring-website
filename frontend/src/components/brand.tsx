@@ -9,7 +9,7 @@ export function Brand({ navbar = false }: { navbar?: boolean }) {
     >
       <img
         className="brand-mark"
-        src="/assets/favicon.png?v=20261019-circle"
+        src="/assets/apple-touch-icon.png?v=20261019-circle"
         width={38}
         height={38}
         alt=""

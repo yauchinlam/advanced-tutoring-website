@@ -6,6 +6,49 @@ test.use({ javaScriptEnabled: false });
 const origin = 'https://elitelambdatutoring.com';
 const indexablePaths = ['/', '/about.html', '/rates-faq.html', '/support.html'];
 
+test('shared stylesheets stay within the measured CSS budget', async ({
+  page,
+  request,
+}) => {
+  await page.goto('/');
+  const stylesheets = await page
+    .locator('link[rel="stylesheet"]')
+    .evaluateAll((elements) =>
+      elements.map((element) => element.getAttribute('href')!),
+    );
+  expect(stylesheets.length).toBeGreaterThan(0);
+  let bytes = 0;
+  for (const href of new Set(stylesheets)) {
+    const response = await request.get(href);
+    expect(response.status()).toBe(200);
+    bytes += (await response.body()).byteLength;
+  }
+  // The full Bootstrap import plus site styles previously exceeded 238 KiB.
+  expect(bytes).toBeLessThan(160 * 1024);
+});
+
+test('brand images stay sharp without oversized downloads', async ({
+  page,
+  request,
+}) => {
+  await page.goto('/');
+  const images = page.locator('.brand-mark');
+  await expect(images).toHaveCount(2);
+  for (const image of await images.all()) {
+    await expect(image).toHaveAttribute('width', '38');
+    await expect(image).toHaveAttribute('height', '38');
+    const response = await request.get((await image.getAttribute('src'))!);
+    expect(response.status()).toBe(200);
+    // Keep the shared mark below 50 KiB; the original 512px PNG was 218 KiB.
+    expect((await response.body()).byteLength).toBeLessThan(50 * 1024);
+    await expect
+      .poll(() =>
+        image.evaluate((element) => (element as HTMLImageElement).naturalWidth),
+      )
+      .toBeGreaterThanOrEqual(38 * 3);
+  }
+});
+
 test('indexable pages have unique metadata and canonical internal links', async ({
   page,
 }) => {
