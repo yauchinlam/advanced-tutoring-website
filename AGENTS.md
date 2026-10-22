@@ -6,6 +6,12 @@ Do not use em dashes (U+2014) or en dashes (U+2013) in website copy, metadata, a
 
 Keep these instructions in mind for all future edits in this repository.
 
+## Testing code changes
+
+When changing frontend code, review the Playwright tests in `frontend/tests/` and add or update coverage as needed for changed user-visible behavior. Use accessible locators and retrying assertions. Mock external services such as Calendly instead of creating real bookings or payments. Update `migration-baseline.json` only when the expected content change is intentional, never solely to silence a failing test.
+
+Run commands from `frontend/`. For frontend code changes, run `npm run lint`, `npm run build`, and `npm run typecheck`, then run the relevant Playwright tests with `npm test -- <test-file>` or the full suite with `npm test` when shared behavior changes. Playwright serves the production export, so rebuild before testing changed application code. Documentation-only changes do not require browser tests. Report any checks that could not run and why.
+
 ## Brand color theme
 
 Use this approved Elite Lambda Tutoring palette for all website styling and future visual updates:
