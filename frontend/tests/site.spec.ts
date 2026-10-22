@@ -26,22 +26,19 @@ for (const [slug, original] of Object.entries(baseline)) {
     expect(html).toContain('Elite Lambda Tutoring');
     await expect(page.locator('h1')).toHaveCount(1);
     for (const heading of original.headings) {
-      expect(
-        (await page.locator('main').innerText()).replace(/\s+/g, ' '),
-      ).toContain(heading.replace(/\s+/g, ' '));
+      await expect(
+        page.getByRole('heading', { name: heading, exact: true }),
+      ).toHaveCount(1);
     }
-    const paragraphs = (await page.locator('main p').allTextContents())
-      .join(' ')
-      .replace(/\s+/g, ' ');
     for (const paragraph of original.paragraphs)
-      expect(paragraphs).toContain(paragraph);
+      await expect(page.locator('main')).toContainText(paragraph);
     for (const id of original.anchors)
-      expect(await page.locator(`[id="${id}"]`).count()).toBe(1);
-    const canonical = await page
-      .locator('link[rel="canonical"]')
-      .getAttribute('href');
-    expect(new URL(canonical!).href).toBe(
-      `https://elitelambdatutoring.com/${slug === 'index' ? '' : slug + '.html'}`,
+      await expect(page.locator(`[id="${id}"]`)).toHaveCount(1);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      slug === 'index'
+        ? /^https:\/\/elitelambdatutoring\.com\/?$/
+        : `https://elitelambdatutoring.com/${slug}.html`,
     );
     await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
       'content',
@@ -49,22 +46,22 @@ for (const [slug, original] of Object.entries(baseline)) {
     );
     await expect(page.locator('header a[aria-current="page"]')).toHaveCount(1);
     for (const image of await page.locator('.brand-mark').all()) {
-      expect(
-        await image.evaluate(
-          (element) => getComputedStyle(element).borderRadius,
-        ),
-      ).toBe('50%');
-      expect(
-        await image.evaluate(
-          (element) => (element as HTMLImageElement).naturalWidth,
-        ),
-      ).toBeGreaterThan(0);
+      await expect(image).toHaveCSS('border-radius', '50%');
+      await expect
+        .poll(() =>
+          image.evaluate(
+            (element) => (element as HTMLImageElement).naturalWidth,
+          ),
+        )
+        .toBeGreaterThan(0);
     }
-    expect(
-      await page.evaluate(
-        () => document.documentElement.scrollWidth <= window.innerWidth,
-      ),
-    ).toBe(true);
+    await expect
+      .poll(() =>
+        page.evaluate(
+          () => document.documentElement.scrollWidth <= window.innerWidth,
+        ),
+      )
+      .toBe(true);
     const links = await page
       .locator('a[href]')
       .evaluateAll((elements) =>
@@ -81,6 +78,43 @@ for (const [slug, original] of Object.entries(baseline)) {
         path: testInfo.outputPath('homepage.png'),
         fullPage: true,
       });
+  });
+}
+
+for (const [label, path] of [
+  ['About', '/about.html'],
+  ['Rates & FAQ', '/rates-faq.html'],
+  ['Support', '/support.html'],
+  ['Book a session', bookingUrl],
+] as const) {
+  test(`visitor navigates from home to ${label}`, async ({ page }) => {
+    if (path === bookingUrl) {
+      await page.route('https://calendly.com/**', (route) =>
+        route.fulfill({
+          contentType: 'text/html',
+          body: '<h1>Calendly destination</h1>',
+        }),
+      );
+    }
+    await page.goto('/index.html');
+    const navigation = page.getByRole('navigation', {
+      name: 'Main navigation',
+    });
+    const toggle = navigation.getByRole('button', {
+      name: 'Toggle navigation',
+    });
+    if (await toggle.isVisible()) await toggle.click();
+    await navigation.getByRole('link', { name: label, exact: true }).click();
+    await expect(page).toHaveURL(path);
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible();
+    if (path !== bookingUrl) {
+      if (await toggle.isVisible()) await toggle.click();
+      await expect(
+        page
+          .getByRole('navigation', { name: 'Main navigation' })
+          .getByRole('link', { name: label, exact: true }),
+      ).toHaveAttribute('aria-current', 'page');
+    }
   });
 }
 

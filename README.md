@@ -1,12 +1,13 @@
 # Elite Lambda Tutoring
 
-A five-page tutoring website built with React, Next.js App Router, and TypeScript. Next.js generates static HTML, CSS, and JavaScript in `out/`. Production needs no Node.js server, database, or Python service. Calendly continues to handle scheduling and configured payments.
+A five-page tutoring website built with React, Next.js App Router, and TypeScript. Next.js generates static HTML, CSS, and JavaScript in `frontend/out/`. Production needs no Node.js server, database, or Python service. Calendly continues to handle scheduling and configured payments.
 
 ## Development
 
-Use the Node.js version in `.nvmrc`:
+Run frontend commands from `frontend/`, using the Node.js version in `frontend/.nvmrc`:
 
 ```sh
+cd frontend
 nvm install
 nvm use
 npm ci
@@ -24,20 +25,24 @@ npm test
 npm run preview
 ```
 
-The production preview serves `out/` at `http://localhost:3000`; set `PORT` to use another port. Build before previewing. Browser tests start their own production preview on port 3100 and cover desktop and mobile layouts. Type checking after a build includes Next.js generated route types.
+The production preview serves `out/` at `http://localhost:3000`; set `PORT` to use another port. Build before previewing. Browser tests start their own production preview on port 3100 and cover desktop and mobile layouts. Type checking after a build includes Next.js generated route types. Tests cover homepage navigation to About, Rates & FAQ, Support, and booking at each configured screen size. Calendly navigation is mocked. Failures retain screenshots and traces in `test-results/`; the HTML report is written to `playwright-report/`. Run `npx playwright show-report` from `frontend/` to inspect it. CI retries failed tests once and uploads both diagnostic directories on failure.
 
 ## Project structure
 
+The Next.js application lives in `frontend/`, including its package files and Next.js, TypeScript, ESLint, Prettier, Node.js, and Playwright configuration. Repository instructions and GitHub workflows remain at the repository root. Paths in the content and URL sections below are relative to `frontend/`.
+
+Generated dependencies, build output, and test results stay inside `frontend/` and are ignored by Git.
+
 | Location                     | Purpose                                                                      |
 | ---------------------------- | ---------------------------------------------------------------------------- |
-| `src/app/`                   | Page components, root layout, and global styles                              |
-| `src/components/`            | Shared branding, navigation, footer, contact and booking links, FAQ controls |
-| `src/lib/site-config.ts`     | Typed public business details                                                |
-| `src/lib/page-data.json`     | Page descriptions, canonical URLs, and sharing metadata                      |
-| `src/lib/metadata.ts`        | Next.js metadata generation                                                  |
-| `public/`                    | Images, favicon, custom domain file, robots, and sitemap                     |
-| `scripts/preview.mjs`        | Static production preview server                                             |
-| `tests/`                     | Browser tests and the original page heading and anchor baseline              |
+| `frontend/src/app/`                   | Page components, root layout, and global styles                              |
+| `frontend/src/components/`            | Shared branding, navigation, footer, contact and booking links, FAQ controls |
+| `frontend/src/lib/site-config.ts`     | Typed public business details                                                |
+| `frontend/src/lib/page-data.json`     | Page descriptions, canonical URLs, and sharing metadata                      |
+| `frontend/src/lib/metadata.ts`        | Next.js metadata generation                                                  |
+| `frontend/public/`                    | Images, favicon, custom domain file, robots, and sitemap                     |
+| `frontend/scripts/preview.mjs`        | Static production preview server                                             |
+| `frontend/tests/`                     | Browser tests and the original page heading and anchor baseline              |
 | `.github/workflows/site.yml` | PR checks, production build, and deployment from main                        |
 
 Page content is rendered at build time. The mobile navigation, grouped FAQ accordions, and booking compatibility redirect use small React Client Components. Bootstrap CSS is installed through npm; Bootstrap JavaScript and CDN requests are not used. Local images use standard image elements because this static deployment has no image optimization server.
@@ -64,17 +69,17 @@ Each page exports its title, description, canonical, Open Graph, and Twitter met
 
 ## Deployment and rollback
 
-GitHub Actions validates pull requests into `main`. Pushes to `main` build, test, and deploy `out/` through GitHub Pages. Keep main protected and merge changes through PRs.
+GitHub Actions validates pull requests into `main`. Pushes to `main` build, test, and deploy `frontend/out/` through GitHub Pages. Keep main protected and merge changes through PRs.
 
 Before the first migration deployment, select **Settings > Pages > Build and deployment > Source > GitHub Actions**. Changing this setting should happen only after local review and before merging the migration PR. The custom domain remains `elitelambdatutoring.com`; the export includes `CNAME`, `.nojekyll`, `robots.txt`, and `sitemap.xml`. Review HTTPS enforcement and certificate status in Pages settings; the migration does not change these settings automatically.
 
-For another static host, use `npm ci && npm run build` as the build command and `out/` as the publish directory. Do not publish the repository root or use `next start` for a static export.
+For another static host, set the application root to `frontend/`, use `npm ci && npm run build` as the build command, and use `out/` relative to that application root as the publish directory. Do not publish the repository root or use `next start` for a static export.
 
 For rollback after deployment, redeploy a previously successful Pages artifact if available. For a durable rollback, revert the migration through a PR and restore the previous Pages deployment source if returning to branch-based publishing. The pre-migration HTML site remains in Git history.
 
 ## Future Python backend
 
-Python is outside this migration. When requirements call for accounts, lesson records, or custom workflows, add a separately hosted Python API and database. The React frontend can remain. Choose authentication, framework, storage, and API contracts then. Browser code must never hold backend secrets. Server features would require revisiting static hosting or deploying the API separately.
+Python is outside this migration. When requirements call for accounts, lesson records, or custom workflows, add a separately hosted Python API and database in a new `backend/` directory alongside `frontend/`. Keep Python dependency configuration and backend tests inside `backend/`. Django can use `manage.py`, a project configuration package, and application packages. Flask can use an application package and a separate `tests/` directory. Add this directory when backend work begins. The React frontend can remain. Choose authentication, framework, storage, and API contracts then. Browser code must never hold backend secrets. Server features would require revisiting static hosting or deploying the API separately.
 
 ## Migration review checklist
 
