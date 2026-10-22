@@ -9,6 +9,7 @@ export function pageMetadata(key: keyof typeof pages): Metadata {
   return {
     title,
     description: page.description,
+    ...(key === 'book' ? { robots: { index: false, follow: true } } : {}),
     alternates: { canonical: page.canonical },
     openGraph: {
       type: 'website',

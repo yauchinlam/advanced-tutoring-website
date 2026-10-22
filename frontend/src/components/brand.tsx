@@ -4,7 +4,7 @@ export function Brand({ navbar = false }: { navbar?: boolean }) {
   return (
     <a
       className={`brand${navbar ? ' navbar-brand' : ''}`}
-      href="/index.html"
+      href="/"
       aria-label={`${siteConfig.businessName} home`}
     >
       <img

@@ -17,7 +17,7 @@ export const siteConfig = {
   businessName: 'Elite Lambda Tutoring',
   publicName: 'Yauchin M. Lam',
   professionalTitle: 'Advanced Math & Physics Tutor | Senior Software Engineer',
-  locationText: 'In-Person Tutoring in Selected DMV Areas | Online Nationwide',
+  locationText: 'In-Person Tutoring in Selected Washington, D.C., Maryland, and Virginia Areas | Online Nationwide',
   primaryCta: 'Book a Tutoring Session',
   email: 'support@elitelambdatutoring.com',
   phone: '',
