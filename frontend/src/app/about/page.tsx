@@ -13,7 +13,9 @@ export default function Page() {
         <section className="section page-intro" aria-labelledby="page-title">
           <div className="container">
             <p className="eyebrow">About your tutor</p>
-            <h1 id="page-title">Patient teaching. Strong foundations.</h1>
+            <h1 id="page-title">
+              Meet Yauchin M. Lam, your math and physics tutor.
+            </h1>
             <p className="intro">
               Get to know the background and experience behind the tutoring, and
               the belief that a clear explanation can change how a subject
@@ -33,7 +35,7 @@ export default function Page() {
                 <img
                   className="tutor-headshot img-fluid"
                   src="/assets/yauchin-lam-headshot.jpg"
-                  alt="Portrait of the tutor"
+                  alt="Yauchin M. Lam, math and physics tutor"
                   width="400"
                   height="400"
                   loading="lazy"

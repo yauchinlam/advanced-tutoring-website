@@ -94,3 +94,15 @@ Python is outside this migration. When requirements call for accounts, lesson re
 The lockfile pins the toolchain. The Babel parser override avoids a registry dependency-resolution failure, and the Browserslist override selects a patched release. ESLint 9 is retained for compatibility with the Next.js lint configuration and its plugins.
 
 The install audit reports five high-severity entries from a single unpatched `braces` issue propagated through the Next.js lint tooling (`eslint-config-next` > Next.js ESLint plugin > `fast-glob` > `micromatch` > `braces`). These are development dependencies used with repository-controlled patterns, not code served in the static export. Track [GHSA-vfj7-8cjw-p6xm](https://github.com/advisories/GHSA-vfj7-8cjw-p6xm) for an upstream fix. Do not run a forced major dependency downgrade to suppress the report. Standalone audit requests timed out in this environment; the findings above come from the successful installation audit.
+
+## Search visibility
+
+The homepage canonical is `/`; internal homepage links use that URL while `/index.html` remains available for older links. Other public pages retain their existing `.html` URLs. Titles and descriptions live in `frontend/src/lib/page-data.json`, with the business name appended by the metadata helper.
+
+The booking compatibility page uses `noindex, follow` and is excluded from the sitemap. It remains crawlable and retains its Calendly link without JavaScript. Keep `frontend/public/sitemap.xml` limited to canonical indexable pages when adding routes.
+
+The homepage includes Organization JSON-LD generated from public business configuration. Keep structured data consistent with visible content. No LocalBusiness address or ratings are asserted. A public business address would need to be confirmed before evaluating LocalBusiness markup. Playwright SEO checks inspect the static site without JavaScript.
+
+These changes follow Google's [SEO Starter Guide](https://developers.google.com/search/docs/fundamentals/seo-starter-guide), [canonical guidance](https://developers.google.com/search/docs/crawling-indexing/consolidate-duplicate-urls), [sitemap guidance](https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap), and [Organization guidance](https://developers.google.com/search/docs/appearance/structured-data/organization). Search Console inspection and sitemap submission remain post-deployment tasks; markup and metadata do not guarantee rankings or rich results.
+
+Performance measurements, asset budgets, and the post-deployment Search Console checklist are documented in [SEO performance and launch verification](docs/seo-performance.md).

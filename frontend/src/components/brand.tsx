@@ -4,12 +4,12 @@ export function Brand({ navbar = false }: { navbar?: boolean }) {
   return (
     <a
       className={`brand${navbar ? ' navbar-brand' : ''}`}
-      href="/index.html"
+      href="/"
       aria-label={`${siteConfig.businessName} home`}
     >
       <img
         className="brand-mark"
-        src="/assets/favicon.png?v=20261019-circle"
+        src="/assets/apple-touch-icon.png?v=20261019-circle"
         width={38}
         height={38}
         alt=""

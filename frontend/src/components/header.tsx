@@ -40,7 +40,7 @@ export function Header({ current }: { current: string }) {
                 <li className="nav-item" key={slug}>
                   <a
                     className={`nav-link${current === slug ? ' active' : ''}`}
-                    href={`/${slug}.html`}
+                    href={slug === 'index' ? '/' : `/${slug}.html`}
                     aria-current={current === slug ? 'page' : undefined}
                   >
                     {label}

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import './bootstrap.scss';
 import './globals.css';
 import { Footer } from '@/components/footer';
 

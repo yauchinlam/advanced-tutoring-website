@@ -1,3 +1,4 @@
+import { OrganizationData } from '@/components/organization-data';
 import { Closing } from '@/components/closing';
 import { BookingLink } from '@/components/booking-link';
 import { siteConfig } from '@/lib/site-config';
@@ -9,6 +10,7 @@ export const metadata = pageMetadata('index');
 export default function Page() {
   return (
     <>
+      <OrganizationData />
       <Header current="index" />
       <main id="main">
         <section className="hero" aria-labelledby="hero-title">
@@ -19,7 +21,7 @@ export default function Page() {
                   High-school &amp; college · Mathematics &amp; physics
                 </p>
                 <h1 id="hero-title">
-                  Advanced mathematics.
+                  Math tutoring.
                   <br />
                   <span>Physics made clear.</span>
                 </h1>
