@@ -44,13 +44,24 @@ npm test
 
 Build before running Playwright because browser tests exercise the exported site. To review the export manually, run `npm run preview` after building. It serves `out/` on port 3000 by default. Stop the development server first or use `PORT=3100 npm run preview` to choose another port.
 
-The suite covers desktop, tablet, and mobile layouts in Chromium, including content, navigation, FAQs, Calendly compatibility, metadata, and asset budgets. Tests mock Calendly and do not create real appointments or charges. See the [frontend testing guide](docs/frontend.md#testing) for reports, targeted tests, and current viewport-specific skips.
+The suite covers desktop, tablet, and mobile layouts in Chromium, including content, navigation, FAQs, booking selection, metadata, and asset budgets. Tests mock Calendly and do not create real appointments or charges. See the [frontend testing guide](docs/frontend.md#testing) for reports, targeted tests, and current viewport-specific skips.
 
 ## Making changes
 
 Create a feature branch from current `main`, implement and validate the change, and open a pull request. The required `build` check must pass before merging into `main`. A successful workflow on `main` deploys the static export automatically. See [deployment and operations](docs/deployment.md) for the full release process.
 
+See [location booking](docs/booking.md) for map and per-event configuration, coordinate verification, and launch steps.
+
 Edit public business details in `frontend/src/lib/site-config.ts`, page copy in `frontend/src/app/`, and titles and descriptions in `frontend/src/lib/page-data.json`. Rebuild to publish changes. Public configuration and generated browser bundles must never contain credentials or private student information. Scheduling availability and payment settings are maintained in Calendly.
+
+## Configuration
+
+- `frontend/src/lib/site-config.ts`: business details, contacts, social links, and general copy.
+- `frontend/src/lib/booking-config.ts`: the Calendly account and all five booking options, including public event URLs, rates, coupons, addresses, and coordinates. Update addresses and coordinates together.
+- Calendly prices, coupons, and event descriptions must be updated manually alongside the code. Nothing synchronizes these settings automatically.
+- The map component reads `NEXT_PUBLIC_GEOAPIFY_API_KEY`, supplied by gitignored `frontend/.env` locally and a GitHub Actions secret in production. Restrict the browser key to the production domain and localhost, or use a separate development key.
+
+Run `npm run test:config` from `frontend/` to validate all five booking options without a browser or production build. CI runs this check before building. Missing or invalid event URLs fail this check; disabled buttons remain a runtime fallback. When the map key is missing, the selected address and a plain external Google Maps link remain available.
 
 ## Repository boundaries
 

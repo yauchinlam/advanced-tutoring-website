@@ -13,7 +13,7 @@ The SEO changes are deployed. Page titles, descriptions, canonical URLs, and soc
 | `/about.html`     | Indexable, self-canonical                                                        |
 | `/rates-faq.html` | Indexable, self-canonical                                                        |
 | `/support.html`   | Indexable, self-canonical                                                        |
-| `/book.html`      | `noindex, follow`; manual Calendly fallback and client redirect remain available |
+| `/book.html`      | `noindex, follow`; online and location booking selector |
 
 Internal homepage links use `/`. `frontend/public/sitemap.xml` includes only the four indexable canonical URLs. `frontend/public/robots.txt` permits crawling and advertises the sitemap. Do not block `/book.html` in robots.txt: crawlers must be able to read its noindex directive.
 

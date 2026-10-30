@@ -27,9 +27,8 @@ export default function Page() {
             <p className="eyebrow">The session experience</p>
             <h2 id="session-title">A focused space to work things out.</h2>
             <p className="intro">
-              A focused 60-minute session, online nationwide or in person
-              throughout selected areas of the DMV, with sessions available at
-              the student’s home or at a mutually agreed public location.
+              A focused 60-minute session, online nationwide through Google Meet
+              or in person at one of four selected public locations.
             </p>
             <div className="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4 mt-3">
               <div className="col">
@@ -40,9 +39,8 @@ export default function Page() {
                   <h3>A shared workspace</h3>
                   <p>
                     Online sessions use a digital whiteboard and screen sharing.
-                    In-person sessions take place at the student’s home within
-                    selected DMV service areas, with public meeting locations
-                    available by agreement.
+                    In-person sessions take place at the public location
+                    selected when booking.
                   </p>
                 </article>
               </div>
@@ -93,8 +91,9 @@ export default function Page() {
                 <h3>Session rates</h3>
                 <p data-business="rateText">{siteConfig.rateText}</p>
                 <p>
-                  The same rate applies online and in person. Minimum booking:
-                  one 60-minute session.
+                  Choose your format and location to see prices and the coupon
+                  to enter at Calendly checkout. Minimum booking: one 60-minute
+                  session.
                 </p>
               </div>
               <BookingLink>
@@ -160,11 +159,11 @@ export default function Page() {
                 >
                   <p>
                     {
-                      'Online tutoring is available nationwide using screen sharing and a digital whiteboard. In-person tutoring is offered at the student’s home within selected DMV (Washington, D.C., Maryland, and Virginia) service areas. Public meeting locations are also available by agreement. '
+                      'Online tutoring is available nationwide through Google Meet, using screen sharing and a digital whiteboard. In-person tutoring meets at the four listed public locations in Winchester, Chantilly, Arlington, and Hanover. '
                     }
                     <a href="/support.html">Contact support</a>
                     {
-                      ' to confirm service-area availability and agree on the meeting location before booking. Online meeting details are provided through Calendly.'
+                      ' for help choosing a location. Online meeting details are provided through Calendly.'
                     }
                   </p>
                 </FaqItem>
@@ -224,7 +223,7 @@ export default function Page() {
                     {'Sessions are 60 minutes. '}
                     <span data-business="rateText">{siteConfig.rateText}</span>
                     {
-                      ' The same rate applies online and in person, with a minimum booking of one session. There are no packages, recurring-session discounts, group rates, or separate exam-preparation premiums at launch.'
+                      ' Minimum booking is one session. Enter the coupon shown for your selected option during Calendly checkout to receive its promotional rate.'
                     }
                   </p>
                 </FaqItem>
@@ -268,7 +267,7 @@ export default function Page() {
                     {'Yes, recurring sessions are available. '}
                     <a href="/support.html#email-support">Email support</a>
                     {
-                      ' to discuss a regular time. Availability, in-home service-area coverage, and any agreed public meeting location must be confirmed.'
+                      ' to discuss a regular time. Availability at your selected public location must be confirmed.'
                     }
                   </p>
                 </FaqItem>

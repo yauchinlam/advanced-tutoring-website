@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-// Inspect build-time HTML, including booking metadata before its client redirect.
+// Inspect build-time HTML, including booking metadata.
 test.use({ javaScriptEnabled: false });
 
 const origin = 'https://elitelambdatutoring.com';
@@ -116,7 +116,7 @@ test('sitemap includes only canonical indexable pages and robots allows crawling
   }
 });
 
-test('booking compatibility page is noindex but keeps its manual booking link', async ({
+test('booking page preserves noindex and its server-rendered online option', async ({
   page,
 }) => {
   await page.goto('/book.html');
@@ -129,11 +129,8 @@ test('booking compatibility page is noindex but keeps its manual booking link', 
     /follow/,
   );
   await expect(
-    page.getByRole('link', { name: 'Continue to Calendly' }),
-  ).toHaveAttribute(
-    'href',
-    'https://calendly.com/elitelambdatutoring/private-tutoring',
-  );
+    page.getByRole('heading', { name: 'Online tutoring' }),
+  ).toBeVisible();
 });
 
 test('homepage contains public Organization data in static HTML', async ({

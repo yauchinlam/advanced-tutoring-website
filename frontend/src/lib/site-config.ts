@@ -7,7 +7,6 @@ export interface SiteConfig {
   primaryCta: string;
   email: string;
   phone: string;
-  calendlyUrl: string;
   rateText: string;
   copyrightYear: string;
   socialLinks: Record<string, string>;
@@ -17,12 +16,13 @@ export const siteConfig = {
   businessName: 'Elite Lambda Tutoring',
   publicName: 'Yauchin M. Lam',
   professionalTitle: 'Advanced Math & Physics Tutor | Senior Software Engineer',
-  locationText: 'In-Person Tutoring in Selected Washington, D.C., Maryland, and Virginia Areas | Online Nationwide',
+  locationText:
+    'In-Person Tutoring in Selected Washington, D.C., Maryland, and Virginia Areas | Online Nationwide',
   primaryCta: 'Book a Tutoring Session',
   email: 'support@elitelambdatutoring.com',
   phone: '',
-  calendlyUrl: 'https://calendly.com/elitelambdatutoring/private-tutoring', // Full HTTPS https://calendly.com/account/event URL.
-  rateText: '$125 per 60-minute session',
+  rateText:
+    'Rates vary by session format and location. View booking details for regular rates, promotional rates, and coupon codes.',
   copyrightYear: '2026',
   socialLinks: {
     linkedin: '',

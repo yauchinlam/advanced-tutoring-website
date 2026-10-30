@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import baseline from './migration-baseline.json';
 
-const bookingUrl = 'https://calendly.com/elitelambdatutoring/private-tutoring';
+const bookingUrl = '/book.html';
 
 for (const [slug, original] of Object.entries(baseline)) {
   test(`${slug}: direct URL, content, metadata, and links`, async ({
@@ -11,12 +11,12 @@ for (const [slug, original] of Object.entries(baseline)) {
     const errors: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     if (slug === 'book') {
-      // Inspect the static compatibility page without following its browser redirect.
+      // Inspect the booking selector in the static export.
       const response = await request.get('/book.html');
       expect(response.status()).toBe(200);
       const html = await response.text();
       expect(html).toContain('Continue to booking.');
-      expect(html).toContain(bookingUrl);
+      expect(html).toContain('Choose your session format');
       return;
     }
     const response = await page.goto(`/${slug}.html`);
@@ -88,14 +88,6 @@ for (const [label, path] of [
   ['Book a session', bookingUrl],
 ] as const) {
   test(`visitor navigates from home to ${label}`, async ({ page }) => {
-    if (path === bookingUrl) {
-      await page.route('https://calendly.com/**', (route) =>
-        route.fulfill({
-          contentType: 'text/html',
-          body: '<h1>Calendly destination</h1>',
-        }),
-      );
-    }
     await page.goto('/index.html');
     const navigation = page.getByRole('navigation', {
       name: 'Main navigation',
@@ -154,24 +146,21 @@ test('FAQ opens by keyboard and closes another answer in its group', async ({
   await expect(page.locator('#faq-answer-2')).toBeVisible();
 });
 
-test('booking compatibility page navigates to Calendly', async ({ page }) => {
-  await page.route('https://calendly.com/**', (route) =>
-    route.fulfill({
-      contentType: 'text/html',
-      body: '<h1>Calendly destination</h1>',
-    }),
-  );
-  await page.goto('/book.html');
-  await expect(page).toHaveURL(bookingUrl);
-});
-
-test('booking fallback works without JavaScript', async ({ browser }) => {
+test('booking page preserves a helpful no-JavaScript fallback', async ({
+  browser,
+}) => {
   const context = await browser.newContext({ javaScriptEnabled: false });
   const page = await context.newPage();
-  await page.goto('http://127.0.0.1:3100/book.html');
+  const response = await page.goto('http://127.0.0.1:3100/book.html');
   await expect(
-    page.getByRole('link', { name: 'Continue to Calendly' }),
-  ).toHaveAttribute('href', bookingUrl);
+    page.getByRole('heading', { name: 'Online tutoring' }),
+  ).toBeVisible();
+  expect(await response!.text()).toContain(
+    '<noscript><p>Enable JavaScript to choose an in-person location, or email support for booking help.</p></noscript>',
+  );
+  await expect(
+    page.getByRole('link', { name: 'Review rates and booking policies' }),
+  ).toBeVisible();
   await context.close();
 });
 

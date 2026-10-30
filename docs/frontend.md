@@ -8,7 +8,7 @@ Paths in this guide are relative to the repository root unless a command explici
 
 The application uses Next.js App Router, React, and TypeScript. `frontend/next.config.mjs` sets `output: 'export'`, so builds produce HTML, CSS, JavaScript, and static assets in `frontend/out/`. Production serves these files without a Node.js runtime.
 
-Page components render content at build time. Small React Client Components handle responsive navigation, grouped FAQ state, and the booking redirect. Shared link helpers validate public contact, social, and Calendly URLs. Invalid contact and social links are omitted. Invalid Calendly URLs fall back to `/book.html` with support guidance.
+Page components render content at build time. Small React Client Components handle responsive navigation, grouped FAQ state, and the booking format/location selector. Shared link helpers validate public contact, social, and Calendly URLs. Invalid contact and social links are omitted. Missing or invalid event URLs disable the corresponding booking action with support guidance. See [location booking](booking.md) for configuration, coordinate sources, and testing.
 
 Bootstrap JavaScript and CDN assets are not used. Images use standard HTML image elements with explicit dimensions; the static host has no Next.js image optimization server.
 
@@ -51,7 +51,7 @@ advanced-tutoring-website/
 | `frontend/src/app/not-found.tsx`  | Custom missing-page content                                                                                       |
 | `frontend/src/app/globals.css`    | Brand styles, page layouts, responsive adjustments, and focus states                                              |
 | `frontend/src/app/bootstrap.scss` | Selected Bootstrap components and complete utility API                                                            |
-| `frontend/src/components/`        | Branding, header, footer, FAQ controls, contact and booking links, closing section, redirect, and structured data |
+| `frontend/src/components/`        | Branding, header, footer, FAQ controls, contact and booking links, closing section, location map, and structured data |
 | `frontend/src/lib/site-config.ts` | Typed public business details and service configuration                                                           |
 | `frontend/src/lib/page-data.json` | Page descriptions, titles, canonical URLs, and social metadata                                                    |
 | `frontend/src/lib/metadata.ts`    | Next.js metadata generation and booking indexing policy                                                           |
@@ -71,12 +71,12 @@ advanced-tutoring-website/
 | `src/app/about/page.tsx`     | `/about.html`     | Tutor background and credentials                             |
 | `src/app/rates-faq/page.tsx` | `/rates-faq.html` | Rates, policies, and interactive FAQ                         |
 | `src/app/support/page.tsx`   | `/support.html`   | Support information and contact options                      |
-| `src/app/book/page.tsx`      | `/book.html`      | Calendly compatibility redirect, excluded from indexing      |
+| `src/app/book/page.tsx`      | `/book.html`      | Location booking selector, excluded from indexing      |
 | `src/app/not-found.tsx`      | `404.html` export | Missing-page content, served with HTTP 404 for unknown paths |
 
 The dev-only rewrites in `next.config.mjs` make `.html` URLs resolve to App Router pages during development. Production navigation links to exported files directly. Internal homepage links use `/`.
 
-The booking page calls `location.replace` after hydration when the configured Calendly URL is valid. Without JavaScript, a manual booking link remains available. FAQ groups allow one expanded answer per group; preserve question, answer, and group IDs when changing related content or links.
+The booking page offers Online and In Person formats without redirecting automatically. Without JavaScript, the online option and support guidance remain available. See [location booking](booking.md) for configuration and map testing. FAQ groups allow one expanded answer per group; preserve question, answer, and group IDs when changing related content or links.
 
 ## Content, styles, and assets
 
@@ -108,7 +108,7 @@ Playwright configuration lives in `frontend/playwright.config.ts`. All three pro
 
 | Test file under `frontend/tests/` | Coverage                                                                                                                                                                                                       |
 | --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `site.spec.ts`                    | Exported page responses, headings and text, anchor IDs, metadata, links, brand image loading, overflow, visitor navigation, FAQ keyboard behavior, booking redirect and no-JavaScript fallback, and custom 404 |
+| `site.spec.ts`                    | Exported page responses, headings and text, anchor IDs, metadata, links, brand image loading, overflow, visitor navigation, FAQ keyboard behavior, booking selection and no-JavaScript fallback, and custom 404 |
 | `booking-url.spec.ts`             | Direct unit checks for HTTPS and exact Calendly hostname validation                                                                                                                                            |
 | `seo.spec.ts`                     | Static metadata, canonical URLs, sitemap and robots, booking noindex, Organization JSON-LD, and image and stylesheet budgets                                                                                   |
 | `migration-baseline.json`         | Expected headings, paragraphs, and anchors used by content regression checks                                                                                                                                   |
