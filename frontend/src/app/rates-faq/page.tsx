@@ -1,5 +1,6 @@
 import { Closing } from '@/components/closing';
 import { BookingLink } from '@/components/booking-link';
+import { BookingRates } from '@/components/booking-rates';
 import { FaqGroup, FaqItem } from '@/components/faq';
 import { siteConfig } from '@/lib/site-config';
 import { Header } from '@/components/header';
@@ -103,6 +104,7 @@ export default function Page() {
             </aside>
           </div>
         </section>
+        <BookingRates />
         <section className="section" id="faq" aria-labelledby="faq-title">
           <div className="container">
             <p className="eyebrow">Common questions</p>

@@ -88,7 +88,9 @@ test('all five options show correct prices, coupons, addresses, and safe booking
   }
   await page.getByRole('radio', { name: 'Online', exact: true }).check();
   await expect(
-    page.getByRole('heading', { name: 'Online tutoring' }),
+    page
+      .getByRole('article', { name: 'Selected booking option' })
+      .getByRole('heading', { name: 'Online tutoring' }),
   ).toBeVisible();
   await expect(page.getByRole('combobox')).toHaveCount(0);
   await expect(page.getByRole('main')).not.toContainText(/starbucks/i);
