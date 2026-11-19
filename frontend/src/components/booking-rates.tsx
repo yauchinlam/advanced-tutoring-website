@@ -45,6 +45,9 @@ export function BookingRates() {
             );
           })}
         </ul>
+        <p className="mb-0">
+          <a href="/booking-rates.txt">View tutoring rates as plain text</a>
+        </p>
       </div>
     </section>
   );
