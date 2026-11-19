@@ -150,6 +150,9 @@ for (const path of ['/book.html', '/rates-faq.html']) {
     expect(response?.status()).toBe(200);
     const rates = page.getByRole('region', { name: 'Tutoring rates by location' });
     await expect(rates.getByRole('listitem')).toHaveCount(5);
+    await expect(
+      rates.getByRole('link', { name: 'View tutoring rates as plain text' }),
+    ).toHaveAttribute('href', '/booking-rates.txt');
     await expect(rates).toContainText('Each session lasts 60 minutes.');
     for (const option of [onlineBooking, ...tutoringLocations]) {
       const item = rates.getByRole('listitem').filter({
@@ -171,6 +174,36 @@ for (const path of ['/book.html', '/rates-faq.html']) {
     }
   });
 }
+
+test('public plain-text pricing is readable in a single crawler request', async ({
+  request,
+}) => {
+  const response = await request.get('/booking-rates.txt', {
+    headers: {
+      Accept: 'text/plain',
+      'User-Agent': 'OAI-SearchBot/1.0',
+    },
+  });
+
+  expect(response.status()).toBe(200);
+  expect(response.headers()['content-type']).toMatch(/^text\/plain\b/);
+  const [intro, ...sessions] = (await response.text()).trim().split('\n\n');
+  expect(intro).toContain('Sessions are 60 minutes. All prices are in USD.');
+  expect(sessions).toHaveLength(5);
+  for (const option of [onlineBooking, ...tutoringLocations]) {
+    const lines = sessions
+      .find((session) => session.startsWith(`${option.displayName}\n`))
+      ?.split('\n');
+    expect(lines).toEqual([
+      option.displayName,
+      `Meeting location: ${option.address}`,
+      `Regular rate: $${option.regularRate}/hour`,
+      `Promotional rate: $${option.promotionalRate}/hour`,
+      `Calendly coupon: ${option.coupon}`,
+      `Book on Calendly: ${option.calendlyUrl}`,
+    ]);
+  }
+});
 
 test('homepage contains public Organization data in static HTML', async ({
   page,
