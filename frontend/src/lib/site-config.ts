@@ -22,7 +22,7 @@ export const siteConfig = {
   email: 'support@elitelambdatutoring.com',
   phone: '',
   rateText:
-    'Rates vary by session format and location. View booking details for regular rates, promotional rates, and coupon codes.',
+    'The standard rate is $125 per hour for online and in-person tutoring. Save $45 online or $15 in person with the coupon for your session.',
   copyrightYear: '2026',
   socialLinks: {
     linkedin: '',
