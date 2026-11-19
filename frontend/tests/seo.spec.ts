@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { onlineBooking, tutoringLocations } from '../src/lib/booking-config';
 
 // Inspect build-time HTML, including booking metadata.
 test.use({ javaScriptEnabled: false });
@@ -116,7 +117,7 @@ test('sitemap includes only canonical indexable pages and robots allows crawling
   }
 });
 
-test('booking page preserves noindex and its server-rendered online option', async ({
+test('booking page preserves noindex and links to the static rates', async ({
   page,
 }) => {
   await page.goto('/book.html');
@@ -129,9 +130,47 @@ test('booking page preserves noindex and its server-rendered online option', asy
     /follow/,
   );
   await expect(
-    page.getByRole('heading', { name: 'Online tutoring' }),
+    page
+      .getByRole('article', { name: 'Selected booking option' })
+      .getByRole('heading', { name: 'Online tutoring' }),
+  ).toBeVisible();
+  await expect(
+    page.getByRole('link', { name: 'Compare all tutoring rates' }),
+  ).toHaveAttribute('href', '#booking-rates');
+  await expect(
+    page.getByRole('link', { name: 'Review rates and booking policies' }),
   ).toBeVisible();
 });
+
+for (const path of ['/book.html', '/rates-faq.html']) {
+  test(`${path} shows all booking rates and Calendly links without JavaScript`, async ({
+    page,
+  }) => {
+    const response = await page.goto(path);
+    expect(response?.status()).toBe(200);
+    const rates = page.getByRole('region', { name: 'Tutoring rates by location' });
+    await expect(rates.getByRole('listitem')).toHaveCount(5);
+    await expect(rates).toContainText('Each session lasts 60 minutes.');
+    for (const option of [onlineBooking, ...tutoringLocations]) {
+      const item = rates.getByRole('listitem').filter({
+        has: page.getByRole('heading', { name: option.displayName, exact: true }),
+      });
+      await expect(item).toBeVisible();
+      await expect(item).toContainText(option.address);
+      await expect(item).toContainText(
+        `Regular rate: $${option.regularRate}/hour`,
+      );
+      await expect(item).toContainText(
+        `Promotional rate: $${option.promotionalRate}/hour`,
+      );
+      await expect(item).toContainText(`Coupon: ${option.coupon}`);
+      await expect(item.getByRole('link')).toHaveAttribute(
+        'href',
+        option.calendlyUrl,
+      );
+    }
+  });
+}
 
 test('homepage contains public Organization data in static HTML', async ({
   page,

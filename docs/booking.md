@@ -1,6 +1,8 @@
 # Phase 1 location booking
 
-All booking links lead to `/book.html`. Customers choose Online or In Person, then a public location. The existing metadata, navigation, static export, and GitHub Pages hosting are preserved. MapLibre GL JS loads only for In Person. Its worker URL is explicitly bundled using the [MapLibre Next.js guidance](https://maplibre.org/maplibre-gl-js/docs/); the preview server serves `.mjs` assets as JavaScript. There are four markers, a native keyboard-accessible selector, and a shared details card. Missing keys, tile failures, and unavailable WebGL leave the selector usable, with the selected address and an external Google Maps link. There is no geolocation, routing, distance calculation, or dynamic pricing.
+Site navigation leads to `/book.html`. Customers choose Online or In Person, then a public location. MapLibre GL JS loads only for In Person. Its worker URL is explicitly bundled using the [MapLibre Next.js guidance](https://maplibre.org/maplibre-gl-js/docs/); the preview server serves `.mjs` assets as JavaScript. There are four markers, a native keyboard-accessible selector, and a shared details card. Missing keys, tile failures, and unavailable WebGL leave the selector usable, with the selected address and an external Google Maps link. There is no geolocation, routing, distance calculation, or dynamic pricing.
+
+The static HTML for `/book.html` and `/rates-faq.html` also lists all five options, their addresses or online meeting format, rates, coupons, and direct Calendly links. Both views use the same booking configuration as the interactive selector. `/rates-faq.html` is indexable, and `/book.html` uses `noindex, follow`.
 
 ## Configuration and launch
 

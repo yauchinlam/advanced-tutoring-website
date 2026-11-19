@@ -146,24 +146,6 @@ test('FAQ opens by keyboard and closes another answer in its group', async ({
   await expect(page.locator('#faq-answer-2')).toBeVisible();
 });
 
-test('booking page preserves a helpful no-JavaScript fallback', async ({
-  browser,
-}) => {
-  const context = await browser.newContext({ javaScriptEnabled: false });
-  const page = await context.newPage();
-  const response = await page.goto('http://127.0.0.1:3100/book.html');
-  await expect(
-    page.getByRole('heading', { name: 'Online tutoring' }),
-  ).toBeVisible();
-  expect(await response!.text()).toContain(
-    '<noscript><p>Enable JavaScript to choose an in-person location, or email support for booking help.</p></noscript>',
-  );
-  await expect(
-    page.getByRole('link', { name: 'Review rates and booking policies' }),
-  ).toBeVisible();
-  await context.close();
-});
-
 test('unknown pages return a useful 404', async ({ page }) => {
   const response = await page.goto('/does-not-exist.html');
   expect(response?.status()).toBe(404);
