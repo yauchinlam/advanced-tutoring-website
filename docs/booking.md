@@ -4,6 +4,8 @@ Site navigation leads to `/book.html`. Customers choose Online or In Person, the
 
 The static HTML for `/book.html` and `/rates-faq.html` also lists all five options, their addresses or online meeting format, rates, coupons, and direct Calendly links. Both views use the same booking configuration as the interactive selector. `/rates-faq.html` is indexable, and `/book.html` uses `noindex, follow`.
 
+Both pages link to `/booking-rates.txt`, a public plain-text export generated from the same booking configuration at build time. Readers can fetch all five prices, matching coupons, and Calendly event links in one request. Verify this URL on the live site after changing rates or event links.
+
 ## Configuration and launch
 
 `frontend/src/lib/booking-config.ts` is the single source for IDs, addresses, coordinates, rates, coupons, and event URLs. Online is a separate option with no coordinates. The five user-supplied Calendly event URLs are configured here. Edit each option’s `calendlyUrl` directly in this file when its event changes; an empty value disables that option at runtime but fails the required configuration check. Local and production builds use these same URLs; there are no Calendly environment variables or GitHub Actions variables. Each option points to its corresponding event. Missing or invalid URLs disable the relevant booking button at runtime and fail `npm run test:config` before CI builds. Accepted URLs must use HTTPS, the exact `calendly.com` host, and one event under the `elitelambdatutoring` account.
